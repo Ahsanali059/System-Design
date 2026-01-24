@@ -1,0 +1,129 @@
+=======================
+What is System Design ?
+=======================
+
+System Design is the process of defining the architecture, components, modules, interfaces, and data for a system to satisfy specified requirements. It’s about how the system works rather than what the system does.
+
+Focus: Structure and behavior of the system.
+
+Goal: Build scalable, maintainable, and efficient systems.
+
+------
+Types:
+------
+
+High-Level Design (HLD)
+
+Low-Level Design (LLD)
+
+-----------------------
+HLD (High-Level Design)
+-----------------------
+
+High-Level Design describes the system architecture and overall structure without going into implementation details. It’s like a “macro” view.
+
+Key Points:
+
+Shows system components and their interactions.
+
+Focuses on what modules exist and how they communicate.
+
+Used to communicate with stakeholders and project managers.
+
+Often includes diagrams like:
+
+  Block diagrams
+  
+  Component diagrams
+  
+  Data flow diagrams
+
+-------------------------------------------
+HLD Example (for a web app like Instagram):
+-------------------------------------------
+
+Modules:
+
+User Service
+
+Post Service
+
+Feed Service
+
+Notification Service
+
+External systems:
+
+Database (MySQL, Redis)
+
+CDN for images/videos
+
+Architecture pattern: Microservices
+
+Communication: REST APIs / gRPC
+
+HLD Focus:
+
+Components
+
+Architecture (Monolithic / Microservices / Client-Server)
+
+Data flow between modules
+
+Technology stack (optional)
+------------------------
+LLD (Low-Level Design)
+------------------------
+Low-Level Design goes inside the modules. It shows how each module works internally with complete detail.
+
+Key Points:
+
+Focus on classes, methods, data structures, algorithms, interfaces.
+
+Shows interaction between classes and methods.
+
+Can include:
+
+Class diagrams
+
+Sequence diagrams
+
+Database schema
+
+API specifications
+
+LLD Example (for Post Service in Instagram):
+
+Classes:
+
+PostController → handles HTTP requests
+
+PostService → business logic
+
+PostRepository → database interactions
+
+Methods:
+
+createPost(userId, content)
+
+getFeed(userId)
+
+Database tables:
+
+posts(id, user_id, content, timestamp)
+
+Interactions:
+
+PostController calls PostService, which calls PostRepository
+
+==========
+LLD Focus:
+==========
+
+Implementation details
+
+Algorithms and logic
+
+Exact APIs and data structures
+
+Database schema and queries

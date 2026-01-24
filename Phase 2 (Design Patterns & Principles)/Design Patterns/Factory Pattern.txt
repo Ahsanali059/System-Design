@@ -1,0 +1,94 @@
+Factory Pattern
+
+"Object creation ka decision ek jagah par rakhna, client se new hide kar dena."
+
+Problem (Without Factory)
+
+Payment payment;
+
+if(type.equals("UPI")) {
+    payment = new UpiPayment();
+} else if(type.equals("CARD")) {
+    payment = new CardPayment();
+}
+
+=======
+Issues:
+=======
+
+Too many if-else
+
+New payment add = code change everywhere
+
+Tight coupling
+
+==========================
+Solution → Factory Pattern
+==========================
+
+================================
+1️ Create Interface (Abstraction)
+================================
+
+public interface Payment {
+    void pay(double amount);
+}
+
+=================================
+2️ Create Implementations
+=================================
+
+public class UpiPayment implements Payment {
+    public void pay(double amount) {
+        System.out.println("Paid " + amount + " using UPI");
+    }
+}
+
+public class CardPayment implements Payment {
+    public void pay(double amount) {
+        System.out.println("Paid " + amount + " using Card");
+    }
+}
+
+==========================
+3️ Create Factory Class ⭐
+==========================
+
+public class PaymentFactory {
+
+    public static Payment getPayment(String type) {
+
+        if ("UPI".equalsIgnoreCase(type)) {
+            return new UpiPayment();
+        }
+        if ("CARD".equalsIgnoreCase(type)) {
+            return new CardPayment();
+        }
+
+        throw new IllegalArgumentException("Invalid payment type");
+    }
+}
+
+===========================
+4️ Use Factory (Client Code)
+===========================
+
+public class Main {
+    public static void main(String[] args) {
+
+        Payment payment =
+                PaymentFactory.getPayment("UPI");
+
+        payment.pay(1000);
+    }
+}
+Interview-Important Points
+✔ Why Factory?
+
+Loose coupling
+
+Open/Closed Principle
+
+Clean code
+
+Easy extensibility

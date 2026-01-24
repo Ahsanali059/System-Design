@@ -1,0 +1,73 @@
+----------------------------------
+HTTP (HyperText Transfer Protocol)
+----------------------------------
+
+HTTP is a protocol used for transferring data (like web pages) between a client (browser, app) and a server over the internet.
+
+  -> Protocol type: Application layer protocol
+  
+  -> Port: 80 (default)
+  
+  -> Data transfer: Plain text (not encrypted)
+  
+  -> Use: Loading websites, APIs, and communication between client and server
+
+****************************
+How HTTP works (simplified):
+****************************
+
+Browser sends an HTTP request to server:
+GET /index.html HTTP/1.1
+
+Server processes the request and sends a response:
+HTTP/1.1 200 OK + HTML content
+
+Browser renders the content
+
+------------------
+Problem with HTTP:
+------------------
+
+Data is not encrypted, so anyone can intercept it (Man-in-the-middle attack).
+
+Example: Passwords, credit card numbers, or API keys sent over HTTP can be stolen.
+
+-------------------------------------------
+HTTPS (HyperText Transfer Protocol Secure)
+-------------------------------------------
+
+HTTPS is HTTP + SSL/TLS. It encrypts data between client and server so that even if someone intercepts it, they cannot read it.
+
+  -> Protocol type: Application layer protocol with encryption
+  
+  -> Port: 443 (default)
+  
+  -> Data transfer: Encrypted using TLS (Transport Layer Security)
+  
+  -> Use: Secure websites, banking apps, login forms, APIs
+
+****************
+How HTTPS works:
+****************
+
+-> Browser connects to server via port 443
+
+-> TLS handshake occurs:
+
+-> Server sends SSL certificate (proof of identity)
+
+-> Browser validates the certificate
+
+-> Both generate session keys for encryption
+
+-> All HTTP data is now encrypted and transferred securely
+
+-----------------
+HTTPS Advantages:
+-----------------
+
+Encryption: Protects sensitive data
+
+Authentication: Confirms the server is legitimate
+
+Data Integrity: Data cannot be tampered during transfer

@@ -1,0 +1,68 @@
+Singleton Design Pattern
+
+"Puri application mein kisi class ka sirf ek hi object ho — aur wahi sab jagah use ho."
+
+Kab use karte hain?
+
+Logger
+
+Configuration / Properties
+
+Cache
+
+Thread Pool
+
+Spring Beans (by default)
+==================================
+Simple but NOT thread-safe (Galat)
+==================================
+
+class Singleton {
+    private static Singleton instance;
+
+    private Singleton() {}
+
+    public static Singleton getInstance() {
+        if (instance == null) {
+            instance = new Singleton();
+        }
+        return instance;
+    }
+}
+
+Multithreading mein multiple objects ban sakte hain.
+=====================
+Thread-Safe Singleton
+=====================
+
+public class Singleton {
+    private static volatile Singleton instance;
+
+    private Singleton() {}
+
+    public static Singleton getInstance() {
+        if (instance == null) {
+            synchronized (Singleton.class) {
+                if (instance == null) {
+                    instance = new Singleton();
+                }
+            }
+        }
+        return instance;
+    }
+}
+
+====================
+Third way using Enum
+====================
+
+public enum AppConfig {
+    INSTANCE;
+}
+
+Bas itna likhne se hi Singleton ready
+
+JVM guarantee deta hai: sirf ek instance
+
+
+

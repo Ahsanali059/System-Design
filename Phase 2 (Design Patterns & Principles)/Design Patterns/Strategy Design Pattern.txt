@@ -1,0 +1,94 @@
+Strategy Design Pattern
+
+"Ek hi kaam ke multiple algorithms (strategies) hoon, aur runtime par choose kiya ja sake bina if-else lagaye."
+
+Problem (Without Strategy)
+
+public double calculateDiscount(String type, double price) {
+
+    if ("NEW_USER".equals(type)) {
+        return price * 0.10;
+    } else if ("FESTIVAL".equals(type)) {
+        return price * 0.20;
+    } else if ("VIP".equals(type)) {
+        return price * 0.30;
+    }
+    return 0;
+}
+
+=======
+Issues:
+=======
+
+Long if-else
+
+Hard to maintain
+
+OCP violation
+
+Business rules tightly coupled
+
+===========================
+Solution → Strategy Pattern
+===========================
+
+Step 1:Strategy Interface
+
+public interface DiscountStrategy {
+    double applyDiscount(double amount);
+}
+
+Step 2: Concrete Strategies
+
+public class NewUserDiscount implements DiscountStrategy {
+    public double applyDiscount(double amount) {
+        return amount * 0.10;
+    }
+}
+
+public class FestivalDiscount implements DiscountStrategy {
+    public double applyDiscount(double amount) {
+        return amount * 0.20;
+    }
+}
+
+public class VipDiscount implements DiscountStrategy {
+    public double applyDiscount(double amount) {
+        return amount * 0.30;
+    }
+}
+
+Step 3: Context Class (Uses Strategy)
+
+public class DiscountContext {
+
+    private DiscountStrategy strategy;
+
+    public DiscountContext(DiscountStrategy strategy) {
+        this.strategy = strategy;
+    }
+
+    public double calculate(double amount) {
+        return strategy.applyDiscount(amount);
+    }
+}
+
+Step 4: Client Code (Runtime Selection)
+
+public class Main {
+    public static void main(String[] args) {
+
+        DiscountContext context =
+            new DiscountContext(new VipDiscount());
+
+        System.out.println(context.calculate(1000));
+    }
+}
+
+Interview-Important Points
+
+Avoids if-else
+Open/Closed Principle follow
+Easy to add new strategies
+Runtime behavior change
+

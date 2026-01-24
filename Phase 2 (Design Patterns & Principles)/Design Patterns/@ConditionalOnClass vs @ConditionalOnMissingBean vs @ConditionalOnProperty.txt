@@ -1,0 +1,90 @@
+===================
+@ConditionalOnClass
+===================
+
+Loads configuration ONLY if a specific class exists in classpath.
+Prevents errors when dependency is missing
+
+Core of Spring Boot auto-configuration
+
+Real Use Case
+
+Auto-configure JPA only if EntityManager exists
+
+=======
+Example
+=======
+
+@ConditionalOnClass(DataSource.class)
+@Configuration
+public class DataSourceAutoConfig {
+}
+Note: If DataSource dependency is missing → config is skipped
+
+=========================
+@ConditionalOnMissingBean
+=========================
+
+Bean sirf tab banata hai jab user ne pehle se koi bean na banayi ho
+
+Real Life Example
+
+Socho Spring Boot bolta hai:
+
+“Agar tum apni gaari le aaye ho, main nahi dunga
+Agar nahi laaye, main de deta hoon”
+
+@Bean
+@ConditionalOnMissingBean
+public ObjectMapper objectMapper() {
+    return new ObjectMapper();
+}
+
+Agar tum apna ObjectMapper bana loge →
+Spring Boot apna wala nahi banayega
+
+=============
+Flow Diagram
+=============
+
+User ne bean banayi?
+     |
+     |-- YES → Spring Boot skip karega
+     |
+     |-- NO  → Spring Boot bean create karega
+
+
+=======================
+@ConditionalOnProperty
+=======================
+
+Property ON hogi to feature chalega, OFF hogi to nahi
+
+@Configuration
+@ConditionalOnProperty(
+    name = "email.enabled",
+    havingValue = "true"
+)
+public class EmailConfig {
+}
+
+======================
+application.properties
+======================
+
+email.enabled=true
+
+true → EmailConfig load
+false → EmailConfig skip
+
+Property email.enabled ?
+        |
+        |-- true  → Config load
+        |
+        |-- false → Config skip
+
+@ConditionalOnMissingBean
+"Spring Boot user ki bean ko override nahi karta"
+
+@ConditionalOnProperty
+"Feature ko property se ON/OFF karta hai"

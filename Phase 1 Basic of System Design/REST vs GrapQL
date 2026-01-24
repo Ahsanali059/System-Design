@@ -1,0 +1,110 @@
+REST (Representational State Transfer)
+--------------------------------------
+
+-> REST is an architectural style for designing APIs. It uses HTTP methods to perform CRUD operations on resources (data entities).
+
+-------------
+Key Features:
+-------------
+
+Uses standard HTTP methods:
+
+GET → Read
+
+POST → Create
+
+PUT/PATCH → Update
+
+DELETE → Delete
+
+Each resource has a unique URL (endpoint)
+
+Data format usually JSON, sometimes XML
+
+Stateless: Each request contains all necessary info
+
+-------------
+Pros of REST:
+-------------
+
+Simple and widely used
+
+Cacheable
+
+Works well with HTTP and standard web tools
+
+-------------
+Cons of REST:
+-------------
+
+Over-fetching: Get more data than needed
+
+Under-fetching: Need multiple requests to get related data
+
+Versioning needed when API changes
+
+-------
+GraphQL
+-------
+
+GraphQL is a query language for APIs (developed by Facebook). Instead of multiple endpoints, there is a single endpoint where clients can request exactly the data they need.
+
+-------------
+Key Features:
+-------------
+
+Single endpoint: /graphql
+
+Clients define what fields they want
+
+Returns exactly what is requested (no over-fetching)
+
+Supports queries (read) and mutations (write)
+
+Strongly typed schema
+
+
+---------------------------------
+Example (for a social media app):
+---------------------------------
+
+query {
+  post(id: 123) {
+    title
+    author {
+      name
+      email
+    }
+  }
+}
+
+Response
+
+{
+  "data": {
+    "post": {
+      "title": "Hello",
+      "author": {
+        "name": "John",
+        "email": "john@example.com"
+      }
+    }
+  }
+}
+Pros of GraphQL:
+
+Fetch exactly what you need → less bandwidth
+
+Single endpoint → simpler for clients
+
+Schema allows type checking
+
+Easier to evolve APIs without versioning
+
+Cons of GraphQL:
+
+More complex to implement
+
+Caching is harder compared to REST
+
+Requires learning new query language

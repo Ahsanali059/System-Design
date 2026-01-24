@@ -1,0 +1,118 @@
+Observer Design Pattern
+
+"Ek object (subject) ka state change hone par, automatically multiple dependent objects (observers) ko notify karna."
+
+Problem (Without Observer)
+
+class NewsAgency {
+    private String news;
+
+    public void setNews(String news) {
+        this.news = news;
+        // manually notify all subscribers
+        System.out.println("Notify all subscribers: " + news);
+    }
+}
+
+=======
+Issues:
+=======
+
+Tight coupling
+
+Har subscriber manually handle karna
+
+Scalability problem
+===========================
+Solution → Observer Pattern
+===========================
+
+Step 1: Observer Interface
+
+public interface Observer {
+    void update(String message);
+}
+
+Step 2: Concrete Observers
+
+public class EmailSubscriber implements Observer {
+    private String email;
+    public EmailSubscriber(String email) {
+        this.email = email;
+    }
+
+    public void update(String message) {
+        System.out.println("Email to " + email + ": " + message);
+    }
+}
+
+public class SmsSubscriber implements Observer {
+    private String phone;
+    public SmsSubscriber(String phone) {
+        this.phone = phone;
+    }
+
+    public void update(String message) {
+        System.out.println("SMS to " + phone + ": " + message);
+    }
+}
+
+Step 3: Subject Interface
+
+import java.util.*;
+
+public interface Subject {
+    void addObserver(Observer o);
+    void removeObserver(Observer o);
+    void notifyObservers();
+}
+
+Step 4: Concrete Subject
+
+import java.util.*;
+
+public class NewsAgency implements Subject {
+
+    private String news;
+    private List<Observer> observers = new ArrayList<>();
+
+    public void setNews(String news) {
+        this.news = news;
+        notifyObservers();
+    }
+
+    public void addObserver(Observer o) {
+        observers.add(o);
+    }
+
+    public void removeObserver(Observer o) {
+        observers.remove(o);
+    }
+
+    public void notifyObservers() {
+        for (Observer o : observers) {
+            o.update(news);
+        }
+    }
+}
+
+Step 5: Client Code (Usage)
+
+public class Main {
+    public static void main(String[] args) {
+
+        NewsAgency agency = new NewsAgency();
+
+        Observer email = new EmailSubscriber("ali@gmail.com");
+        Observer sms = new SmsSubscriber("03001234567");
+
+        agency.addObserver(email);
+        agency.addObserver(sms);
+
+        agency.setNews("New Java 21 Released!");
+    }
+}
+
+Output: 
+Email to ali@gmail.com: New Java 21 Released!
+SMS to 03001234567: New Java 21 Released!

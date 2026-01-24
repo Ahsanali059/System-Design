@@ -1,0 +1,107 @@
+Proxy Design Pattern
+
+"Ek object ka placeholder / surrogate create karna jo asli object ke operations ko control kare."
+
+Problem (Without Proxy)
+
+class RealImage {
+    private String fileName;
+    public RealImage(String fileName) {
+        this.fileName = fileName;
+        loadFromDisk();
+    }
+
+    private void loadFromDisk() {
+        System.out.println("Loading " + fileName);
+    }
+
+    public void display() {
+        System.out.println("Displaying " + fileName);
+    }
+}
+
+========
+Usage
+========
+
+RealImage image = new RealImage("photo.jpg");
+image.display();
+image.display(); // reloads every time
+
+=======
+Issues:
+=======
+
+Loading costly
+
+Client has to manage resource-heavy operations
+
+
+Solution → Proxy Pattern ✅
+
+Proxy ka kaam:
+
+Real object ko lazy-load karna
+
+Access control
+
+Logging / Caching / Security
+
+==============
+Implementation
+==============
+Step 1: Common Interface
+public interface Image {
+    void display();
+}
+
+Step 2: Real Object 
+
+public class RealImage implements Image {
+
+    private String fileName;
+
+    public RealImage(String fileName) {
+        this.fileName = fileName;
+        loadFromDisk();
+    }
+
+    private void loadFromDisk() {
+        System.out.println("Loading " + fileName);
+    }
+
+    public void display() {
+        System.out.println("Displaying " + fileName);
+    }
+}
+
+Step 3: Proxy Class
+
+public class ProxyImage implements Image {
+
+    private RealImage realImage;
+    private String fileName;
+
+    public ProxyImage(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public void display() {
+        if (realImage == null) {
+            realImage = new RealImage(fileName); // Lazy initialization
+        }
+        realImage.display();
+    }
+}
+
+Client Code (Usage)
+public class Main {
+    public static void main(String[] args) {
+
+        Image image = new ProxyImage("photo.jpg");
+
+        image.display(); // loads and displays
+        image.display(); // displays without loading
+    }
+}
+
