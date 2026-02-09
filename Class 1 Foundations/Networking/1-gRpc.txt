@@ -1,0 +1,77 @@
+===================================
+gRPC = Google Remote Procedure Call
+===================================
+
+*) It is a high-performance, open-source RPC framework used for service-to-service communication, especially in microservices and distributed systems.
+
+================
+How gRPC Works ?
+================
+
+  *) Client calls a method (not a URL)
+  
+  *) Request is serialized using Protobuf
+  
+  *) Sent over HTTP/2
+  
+  *) Server executes method
+  
+  *) Response sent back in binary format
+  
+==============
+Key Components
+==============
+
+  *) Protocol Buffers (Protobuf)
+
+  *) Binary serialization format
+
+  *) Smaller & faster than JSON
+
+  *) Strongly typed schema (.proto files)
+
+Example: 
+   
+   service UserService {
+  rpc GetUser (UserRequest) returns (UserResponse);
+}
+
+============
+gRPC vs REST
+============
+
+========
+Protocol
+========
+gRPC : HTTP/2
+REST : HTTP/1.1
+
+========
+Payload
+========
+gRPC : Protobuf (binary)
+REST : JSON (text)
+
+========
+Speed
+========
+gRPC : Very fast
+REST : Slower
+
+========
+Schema
+========
+gRPC : Strongly typed
+REST : Weak
+
+=========
+Streaming
+=========
+gRPC : Yes
+REST : Limited
+
+================
+Browser support
+================
+gRPC : (needs proxy / gRPC-Web)
+REST : Yes support

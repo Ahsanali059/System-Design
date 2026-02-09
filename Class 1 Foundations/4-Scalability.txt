@@ -1,0 +1,125 @@
+What is Scalability?
+
+Scalability = Ability of a system to handle increased load 
+(users, requests, data) by adding resources without breaking or 
+degrading performance badly.
+
+====================
+Types of Scalability
+====================
+
+1) Vertical Scaling (Scale Up)
+2) Horizontal Scaling (Scale Out)
+
+=================
+Vertical Scaling
+=================
+
+*) Add more power to the same machine.
+   e.g: Increase CPU / RAM
+        Move DB from 8GB → 64GB RAM
+
+====
+Pros
+====
+
+*) Simple
+*) No code change
+====
+Cons
+====
+
+*) Hardware limit
+*) Single Point of Failure
+*) Expensive
+=========
+Used When
+=========
+
+*) Early-stage apps
+
+*) Legacy systems
+
+======================
+Horizontal Scalability
+======================
+
+*) Add more machines.
+example:
+      -> Multiple app servers behind load balancer
+      -> DB sharding
+
+====
+Pros
+====
+
+	*) Unlimited scaling
+    *) Fault tolerant
+====
+Cons
+====
+
+    *) Complex design
+    *) Data consistency issues
+=========
+Used When
+=========
+
+*) High traffic systems (Google, Meta)
+
+=============================
+Stateless vs Stateful Systems
+=============================
+
+=========
+Stateless
+=========
+*) No user data stored in server memory.
+
+=======
+Example
+=======
+
+*) REST APIs
+*) JWT-based auth
+
+====
+Pros
+====
+
+*) Easy horizontal scaling
+*) Easy failover
+
+====
+Cons
+====
+
+*) Needs external storage
+
+=========
+Stateful
+=========
+
+*) Server keeps session/state.
+
+=======
+Example
+=======
+
+*) Session-based login
+
+*) WebSocket connections
+
+====
+Pros
+====
+
+*) Fast access to state
+
+=====
+Cons
+=====
+
+*) Hard to scale
+
+*) Sticky sessions needed
