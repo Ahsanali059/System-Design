@@ -1,0 +1,90 @@
+==================================
+WebSockets & Real-Time Communication
+==================================
+
+Types / Techniques:
+*) WebSockets
+*) Long Polling
+*) Server-Sent Events (SSE)
+*) gRPC Streaming
+
+================
+WebSockets
+================
+
+*) Full-duplex communication (both sides send anytime)
+*) Persistent connection between client and server
+*) Uses a single TCP connection
+
+How it works:
+1) Client sends HTTP request with Upgrade: websocket
+2) Server accepts and upgrades protocol
+3) Connection stays open for real-time data exchange
+
+Use when:
+*) Chat applications
+*) Live notifications
+*) Online gaming
+*) Real-time dashboards
+
+Limitations:
+*) Connection management is complex
+*) Stateful by nature
+
+================
+Long Polling
+================
+
+*) Client sends request and waits
+*) Server holds request until data is available
+*) Response is sent, then client re-requests
+
+Use when:
+*) WebSockets not available
+*) Low-frequency updates
+
+Limitations:
+*) High latency
+*) Wastes resources
+
+========================
+Server-Sent Events (SSE)
+========================
+
+*) One-way communication (server ? client)
+*) Built on HTTP
+*) Client keeps connection open
+
+Use when:
+*) Live feeds
+*) Stock prices
+*) Notifications (read-only)
+
+Limitations:
+*) Client cannot send data back
+*) Limited browser support compared to REST
+
+====================
+gRPC Streaming
+====================
+
+*) Streaming over HTTP/2
+*) Supports client, server, and bi-directional streaming
+*) Binary data using Protobuf
+
+Use when:
+*) Microservices communication
+*) High performance internal systems
+
+Limitations:
+*) Not browser friendly
+*) Needs gRPC-Web for frontend
+
+========================
+Interview One-Liners
+========================
+
+*) WebSockets ? real-time, bi-directional communication
+*) SSE ? one-way server updates
+*) Long polling ? REST workaround
+*) gRPC streaming ? backend-to-backend streaming

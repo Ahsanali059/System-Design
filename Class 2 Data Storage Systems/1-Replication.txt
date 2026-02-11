@@ -1,0 +1,75 @@
+=====================
+What is Replication ?
+=====================
+
+*) Replication means copying the same data to the multiple databases.
+*) Improve availability and read scalability.
+*) Provide fault tolerance.
+
+There are three type of replications
+
+1) Master-Slave
+2) Master-Master
+3) Leaderless
+
+=============
+Master-Slave
+=============
+
+*) One Master handles writes.
+*) Multiple salves handles reads
+*) Data is replicated from master from slave.
+
+============
+Use when ?
+============
+
+*) when use heavy systems.
+*) Strong control overs writes.
+
+============
+Limitations
+============
+
+*) Master is a single point of failure
+
+==============
+Master-Master 
+==============
+
+*) Multiple nodes can handle writes.
+*) Data is sync between masters.
+
+===========
+Use when ?
+===========
+
+*) High availabilities for availability.
+*) Multi regions systems.
+
+============
+Limitations
+============
+
+*) Complex consistency handling
+
+=============
+3) Leaderless
+=============
+
+*) No single leader
+*) Clients write to multiple replicas
+*) Uses quorum reads/writes
+
+=========
+Use when:
+=========
+
+*) High availability is required
+*) Eventual consistency acceptable
+
+============
+Limitations:
+============
+*) Complex read/write logic
+*) Eventual consistency

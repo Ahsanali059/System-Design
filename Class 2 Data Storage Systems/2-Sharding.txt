@@ -1,0 +1,104 @@
+========
+Sharding
+========
+
+*) Sharding means spitting data accross multiple databases.
+*) Improve write scalability.
+*) Each shard stores a subset of data.
+
+There are 3 types of sharding.
+   1) Range Base
+   2) Hash Base
+   3) Geo Base
+   
+
+===================
+Range-base Sharding
+===================
+
+*) Data is divided by key ranges.
+*) Example: 1-1000,1001,2000
+
+Use When: Range queries are common.
+============
+Limitations
+============
+*) Hot Shards
+*) Uneven data distribution
+
+----------------
+Hash-based Sharding
+----------------
+
+*) A hash function (hash(key) % N) decides which shard stores the data
+*) Same key always maps to the same shard
+*) Data is distributed evenly across all shards
+
+Why it gives even distribution:
+*) Hash function spreads keys randomly
+*) Prevents one shard from becoming overloaded
+
+Use when:
+*) Traffic pattern is uniform
+*) No need for range queries
+*) High write throughput is required
+
+Limitations (Explained):
+*) Range queries are difficult
+   - Related data is spread across multiple shards
+   - Example: users with IDs 1–1000 may exist on many shards
+   - Requires querying all shards → slow
+
+*) Resharding is complex
+   - Adding/removing a shard changes hash results
+   - Large amount of data must be rebalanced
+   - Can cause downtime or heavy data movement
+
+---------------
+Geo-based Sharding
+---------------
+
+*) Data is partitioned based on user geography (country, region, city)
+*) Each shard serves users from a specific location
+*) Data is stored close to users to reduce latency
+
+Why it improves performance:
+*) Requests travel shorter network distance
+*) Faster response time for users
+*) Better user experience for global apps
+
+Use when:
+*) Global applications with users in multiple regions
+*) Low latency is critical
+*) Data access is mostly regional
+
+Limitations (Explained):
+*) Uneven regional traffic
+   - Some regions may have more users than others
+   - Example: US shard overloaded, smaller regions underutilized
+
+*) Cross-region queries are complex
+   - Data needed from multiple regions
+   - High latency due to cross-region network calls
+   - Complicated consistency and replication handling
+
+Real-world examples
+
+Instagram / Facebook → users stored near region
+
+Netflix → content served region-wise
+
+Food delivery apps → city / country based data
+
+Banking systems → country-specific regulations
+
+================================
+What is MOSTLY used in practice?
+================================
+
+*) Hybrid Approach (Very Important)
+
+Geo-based sharding
+        +
+Hash-based sharding (inside each region)
+

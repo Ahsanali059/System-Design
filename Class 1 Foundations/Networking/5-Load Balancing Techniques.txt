@@ -1,0 +1,75 @@
+=========================
+Load Balancing Strategies
+=========================
+
+Types:
+*) Round Robin
+*) Least Connections
+*) Weighted Round Robin
+*) IP Hash
+*) Least Response Time
+*) Random
+
+================
+Round Robin
+================
+
+*) Requests are distributed sequentially across servers
+*) Each server gets equal number of requests
+
+Use when:
+*) Servers are similar
+*) Stateless applications
+
+====================
+Least Connections
+====================
+
+*) Request is sent to the server with the fewest active connections
+
+Use when:
+*) Requests take variable time
+*) Long-running connections exist
+
+========================
+Weighted Round Robin
+========================
+
+*) Each server is assigned a weight
+*) Servers with higher weight receive more traffic
+
+Use when:
+*) Servers have different capacities
+*) Gradual scaling is needed
+
+=============
+IP Hash
+=============
+
+*) Client IP address is hashed to select server
+*) Same client always goes to same server
+
+Use when:
+*) Session persistence is required
+*) Stateful applications
+
+=======================
+Least Response Time
+=======================
+
+*) Selects server with lowest response time
+*) Considers current load and latency
+
+Use when:
+*) Low latency is critical
+*) Real-time systems
+
+========
+Random
+========
+
+*) Randomly chooses a server for each request
+
+Use when:
+*) Simple and fast distribution is enough
+*) No strict traffic pattern needed

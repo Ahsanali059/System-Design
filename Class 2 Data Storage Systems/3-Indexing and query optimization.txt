@@ -1,0 +1,107 @@
+==============================
+Indexing & Query Optimization
+==============================
+
+Concepts:
+*) Indexing
+*) Types of indexes
+*) Query optimization
+*) Execution plan
+*) Covering index
+*) Composite index
+
+==========
+Indexing
+==========
+
+*) Index is a data structure that improves query performance
+*) Allows faster data lookup without scanning full table
+*) Commonly implemented using B-Tree
+
+Benefits:
+*) Faster SELECT queries
+*) Efficient filtering and sorting
+
+Costs:
+*) Extra storage
+*) Slower INSERT, UPDATE, DELETE operations
+
+================
+Types of Indexes
+================
+
+----------------
+Primary Index
+----------------
+
+*) Automatically created on primary key
+*) Ensures uniqueness
+
+----------------
+Secondary Index
+----------------
+
+*) Created on non-primary columns
+*) Improves search performance
+
+----------------
+Composite Index
+----------------
+
+*) Index on multiple columns
+*) Column order matters
+
+Use when:
+*) Queries filter on multiple columns
+
+----------------
+Covering Index
+----------------
+
+*) Index contains all columns required by query
+*) Query is answered directly from index
+
+Benefit:
+*) No table lookup required
+*) Very fast queries
+
+====================
+Query Optimization
+====================
+
+*) Process of improving query performance
+*) Database optimizer chooses best execution plan
+
+Techniques:
+*) Use proper indexes
+*) Avoid SELECT *
+*) Filter data early using WHERE clause
+*) Use LIMIT when possible
+
+====================
+Execution Plan
+====================
+
+*) Shows how database executes a query
+*) Helps identify slow operations
+*) Used to debug performance issues
+
+Example tools:
+*) EXPLAIN (MySQL, PostgreSQL)
+
+========================
+Indexing Best Practices
+========================
+
+*) Index columns used in WHERE, JOIN, ORDER BY
+*) Avoid indexing frequently updated columns
+*) Keep index size small
+*) Remove unused indexes
+
+========================
+Common Interview Points
+========================
+
+*) Index speeds up reads but slows writes
+*) Too many indexes hurt performance
+*) Composite index column order matters
